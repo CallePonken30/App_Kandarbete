@@ -54,7 +54,6 @@ __pycache__/
 # Build outputs
 backend/build/
 backend/dist/
-*.spec
 *.egg-info/
 
 # Logs
