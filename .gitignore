@@ -1,0 +1,129 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+frontend/node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python venv
+backend/venv/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Logs
+npm-debug.log*
+pip-log.txt*
+EOF
+
+# --- PYTHON BACKEND ---
+
+# Virtual environments
+venv/
+venv-x64/
+backend/venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Build outputs
+backend/build/
+backend/dist/
+*.spec
+*.egg-info/
+
+# Logs
+*.log
+
+# Jupyter Notebooks (if used)
+*.ipynb_checkpoints/
+
+# Environment/config
+.env
+*.env
+
+# --- REACT FRONTEND ---
+
+# Node modules
+node_modules/
+**/node_modules/
+
+# Build outputs
+frontend/build/
+
+# Test coverage (if using Jest or similar)
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# --- ELECTRON ---
+
+# Electron-packaged output folders
+electron-backend/
+build/
+dist/
+
+# Electron builder cache
+.out/
+.release/
+
+# --- SYSTEM / EDITOR FILES ---
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# Editors/IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- OTHERS ---
+
+# Lock files (optional, depends on preference)
+package-lock.json
+yarn.lock
+pipfile.lock
+
+# Misc
+*.bak
+*.swp
+*.old
+*.orig
