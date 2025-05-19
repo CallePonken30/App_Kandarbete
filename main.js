@@ -1,20 +1,36 @@
 const { app, BrowserWindow } = require('electron');
 const { spawn } = require('child_process');
 const path = require('path');
+const fs = require('fs');
+
+const logFile = path.join(app.getPath('userData'), 'log.txt');
+
+function log(msg) {
+  const text = `[${new Date().toISOString()}] ${msg}\n`;
+  fs.appendFileSync(logFile, text);
+  console.log(text.trim());
+}
 
 let backendProcess = null;
 
 function startBackend() {
   let scriptPath;
-
   if (process.platform === 'win32') {
     scriptPath = path.join(process.resourcesPath, 'backend', 'backend_win.exe');
   } else {
-    scriptPath = path.join(process.resourcesPath, 'backend', 'backend'); // macOS universal binary
+    scriptPath = path.join(process.resourcesPath, 'backend', 'backend');
   }
 
+  log(`Starting backend at ${scriptPath}`);
   backendProcess = spawn(scriptPath, [], { stdio: 'inherit' });
-  backendProcess.on('error', console.error);
+
+  backendProcess.on('error', (err) => {
+    log(`Backend error: ${err.message}`);
+  });
+
+  backendProcess.on('exit', (code, signal) => {
+    log(`Backend exited with code ${code}, signal ${signal}`);
+  });
 }
 
 function createWindow() {
@@ -30,12 +46,13 @@ function createWindow() {
   });
 
   if (!app.isPackaged) {
-    // Load from local React dev server
+    log('Running in dev mode');
     win.loadURL('http://localhost:3000');
   } else {
-    // Load from packaged frontend + start backend
+    log('Running in production mode');
     startBackend();
     win.loadFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+    log('Frontend loaded');
   }
 }
 
