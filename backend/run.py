@@ -8,7 +8,5 @@ if __name__ == "__main__":
         port=5050,
         debug=False,        # Disable debug mode
         use_reloader=False  # Disable watchdog reloader to prevent infinite restarts
-    @app.route('/health')
-    def health_check():
-        return "OK", 200
+    
     )
