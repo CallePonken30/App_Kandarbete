@@ -222,7 +222,14 @@ def generate_manifest():
     original_name = os.path.splitext(file.filename)[0]
     ext_out = "xlsx" if output_format == "excel" else "csv"
     fname = f'LIMS_{original_name}.{ext_out}'
-    return send_file(buffer, as_attachment=True, download_name=fname)
+    mimetype = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' if output_format == 'excel' else 'text/csv'
+
+    return send_file(
+        buffer,
+        mimetype=mimetype,
+        as_attachment=True,
+        download_name=fname
+    )
 
 @transform_bp.after_request
 def add_cors_headers(response):
