@@ -22,9 +22,13 @@ function startBackend() {
   }
 
   log(`Starting backend at ${scriptPath}`);
-  backendProcess = spawn(scriptPath, [], { stdio: 'inherit' });
+  backendProcess = spawn(scriptPath, [], {
+    windowsHide: true,   // ← hides the black console window on Windows
+    stdio: 'ignore',     // ← don’t pipe stdout/stderr into your app window
+    detached: false
+  });
 
-  backendProcess.on('error', (err) => {
+  backendProcess.on('error', err => {
     log(`Backend error: ${err.message}`);
   });
 
@@ -32,6 +36,7 @@ function startBackend() {
     log(`Backend exited with code ${code}, signal ${signal}`);
   });
 }
+
 
 function createWindow() {
   const win = new BrowserWindow({
